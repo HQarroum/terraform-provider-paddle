@@ -5,7 +5,7 @@ description: |-
   Manages a Paddle product.
 ---
 
-# paddle_product (Resource)
+# paddle_product
 
 Manages a Paddle product. Products are the items or services that you sell.
 
@@ -30,11 +30,11 @@ resource "paddle_product" "saas_platform" {
 ### Required
 
 - `name` (String) Name of the product.
+- `tax_category` (String) Tax category for the product. Must be one of: `standard`, `digital-goods`, `ebooks`, `implementation-services`, `professional-services`, `saas`, `software-programming-services`, `training-services`.
 
 ### Optional
 
 - `description` (String) Description of the product.
-- `tax_category` (String) Tax category for the product. Must be one of: `standard`, `digital-goods`, `ebooks`, `implementation-services`, `professional-services`, `saas`, `software-programming-services`, `training-services`. Defaults to `standard`.
 - `image_url` (String) URL of the product image.
 - `custom_data` (Map of String) Custom metadata as key-value pairs.
 
