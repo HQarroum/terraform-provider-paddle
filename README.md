@@ -69,7 +69,6 @@ provider "paddle" {
 resource "paddle_product" "my_product" {
   name         = "My SaaS Product"
   description  = "A great software product"
-  tax_category = "saas"
   image_url    = "https://example.com/product-image.png"
 
   custom_data = {
@@ -125,7 +124,7 @@ resource "paddle_discount" "summer_sale" {
   description = "Summer Sale 2025"
   type        = "percentage"
   amount      = "20"
-  enabled     = true
+  code        = "SUMMER2025"
 
   restrict_to = [paddle_product.my_product.id]
 }
@@ -135,9 +134,9 @@ resource "paddle_discount" "summer_sale" {
 
 ```hcl
 resource "paddle_notification_setting" "webhook" {
-  description           = "Production webhook endpoint"
-  destination_url       = "https://api.example.com/paddle/webhook"
-  active                = true
+  description              = "Production webhook endpoint"
+  destination              = "https://api.example.com/paddle/webhook"
+  active                   = true
   include_sensitive_fields = false
 
   subscribed_events = [
