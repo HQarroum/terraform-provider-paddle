@@ -5,7 +5,7 @@ description: |-
   Manages a Paddle discount code.
 ---
 
-# paddle_discount (Resource)
+# paddle_discount
 
 Manages a Paddle discount. Discounts let you offer money off transactions.
 

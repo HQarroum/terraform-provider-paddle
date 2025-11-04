@@ -5,7 +5,7 @@ description: |-
   Manages a Paddle notification setting (webhook).
 ---
 
-# paddle_notification_setting (Resource)
+# paddle_notification_setting
 
 Manages a Paddle notification setting. Notification settings allow you to subscribe to events and receive webhooks.
 

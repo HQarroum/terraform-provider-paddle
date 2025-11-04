@@ -5,7 +5,7 @@ description: |-
   Retrieves information about a Paddle product.
 ---
 
-# paddle_product (Data Source)
+# paddle_product
 
 Retrieves information about an existing Paddle product.
 

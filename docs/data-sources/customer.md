@@ -5,7 +5,7 @@ description: |-
   Retrieves information about a Paddle customer.
 ---
 
-# paddle_customer (Data Source)
+# paddle_customer
 
 Retrieves information about an existing Paddle customer.
 

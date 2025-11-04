@@ -5,7 +5,7 @@ description: |-
   Manages a Paddle customer.
 ---
 
-# paddle_customer (Resource)
+# paddle_customer
 
 Manages a Paddle customer. Customers are people or businesses that buy from you.
 

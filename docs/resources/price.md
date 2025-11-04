@@ -5,7 +5,7 @@ description: |-
   Manages a Paddle price for a product.
 ---
 
-# paddle_price (Resource)
+# paddle_price
 
 Manages a Paddle price. Prices determine how much and how often you charge for a product.
 

@@ -5,7 +5,7 @@ description: |-
   Retrieves information about a Paddle price.
 ---
 
-# paddle_price (Data Source)
+# paddle_price
 
 Retrieves information about an existing Paddle price.
 

@@ -5,7 +5,7 @@ description: |-
   Retrieves information about a Paddle discount.
 ---
 
-# paddle_discount (Data Source)
+# paddle_discount
 
 Retrieves information about an existing Paddle discount.
 
