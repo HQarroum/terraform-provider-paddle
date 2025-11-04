@@ -53,6 +53,3 @@ Thumbs.db
 # Debug files
 *.pprof
 __debug_bin
-
-# Documentation generation
-/docs/
