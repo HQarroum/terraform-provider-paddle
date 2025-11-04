@@ -87,7 +87,7 @@ resource "paddle_discount" "launch_discount" {
   type        = "percentage"
   mode        = "standard"
   amount      = "20"
-  code        = "LAUNCH2025V7"
+  code        = "LAUNCH_2025"
 
   restrict_to = [
     paddle_product.saas_platform.id

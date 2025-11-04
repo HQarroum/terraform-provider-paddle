@@ -241,6 +241,9 @@ func (r *PriceResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 			"updated_at": schema.StringAttribute{
 				Computed:            true,
 				MarkdownDescription: "RFC 3339 timestamp when the price was last updated.",
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
 			},
 		},
 	}

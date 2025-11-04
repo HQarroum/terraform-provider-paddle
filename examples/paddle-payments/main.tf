@@ -72,7 +72,7 @@ resource "paddle_discount" "bundle_discount" {
   type        = "percentage"
   mode        = "standard"
   amount      = "15"
-  code        = "BUNDLE2025V6"
+  code        = "BUNDLE_2025"
 
   restrict_to = [
     paddle_product.ebook.id,
