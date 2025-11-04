@@ -196,5 +196,3 @@ make vet
 
 - 🐛 [Report a Bug](https://github.com/HQarroum/terraform-provider-paddle/issues/new?labels=bug)
 - 💡 [Request a Feature](https://github.com/HQarroum/terraform-provider-paddle/issues/new?labels=enhancement)
-- 📖 [Documentation](https://registry.terraform.io/providers/HQarroum/paddle/latest/docs)
-- 📧 [Contact](mailto:qarroum.halim@gmail.com)
