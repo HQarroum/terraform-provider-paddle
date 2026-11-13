@@ -70,6 +70,11 @@ resource "paddle_price" "monthly" {
 - `unit_price` (Block) Price per unit.
   - `amount` (String, Required) Amount in the lowest denomination (e.g., cents).
   - `currency_code` (String, Required) Three-letter ISO 4217 currency code.
+- `unit_price_overrides` (List of Blocks) Country-specific price overrides. Customers in the listed countries are charged the override price instead of `unit_price`. Changing this forces a new resource.
+  - `country_codes` (List of String, Required) Two-letter ISO 3166-1 alpha-2 country codes (e.g., `["GB", "FR", "DE"]`).
+  - `unit_price` (Block, Required) Price charged in these countries.
+    - `amount` (String, Required) Amount in the lowest denomination (e.g., cents).
+    - `currency_code` (String, Required) Three-letter ISO 4217 currency code.
 - `billing_cycle` (Block) Billing cycle for recurring prices.
   - `interval` (String, Required) Billing interval: `day`, `week`, `month`, or `year`.
   - `frequency` (Number, Required) Number of intervals between billings.
@@ -79,6 +84,7 @@ resource "paddle_price" "monthly" {
 - `quantity` (Block) Quantity limits.
   - `minimum` (Number, Required) Minimum quantity.
   - `maximum` (Number, Required) Maximum quantity.
+- `custom_data` (Map of String) Custom data for this price. Max 10 keys, 1KB total.
 
 ### Read-Only
 

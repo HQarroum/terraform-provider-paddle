@@ -34,9 +34,11 @@ output "price_amount" {
 - `description` (String) Description of the price.
 - `tax_mode` (String) Tax calculation mode.
 - `unit_price` (Block) Price per unit.
+- `unit_price_overrides` (List of Blocks) Country-specific price overrides, each with `country_codes` and `unit_price`.
 - `billing_cycle` (Block) Billing cycle information.
 - `trial_period` (Block) Trial period information.
 - `quantity` (Block) Quantity limits.
+- `custom_data` (Map of String) Custom data for this price.
 - `status` (String) Status of the price.
 - `created_at` (String) RFC 3339 timestamp when created.
 - `updated_at` (String) RFC 3339 timestamp when last updated.
