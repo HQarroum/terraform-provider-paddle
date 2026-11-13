@@ -180,7 +180,7 @@ func (v TaxModeValidator) Description(ctx context.Context) string {
 }
 
 func (v TaxModeValidator) MarkdownDescription(ctx context.Context) string {
-	return "must be one of: `account_setting`, `internal`, `external`"
+	return "must be one of: `account_setting`, `internal`, `external`, `location`"
 }
 
 func (v TaxModeValidator) ValidateString(ctx context.Context, req validator.StringRequest, resp *validator.StringResponse) {
@@ -193,13 +193,14 @@ func (v TaxModeValidator) ValidateString(ctx context.Context, req validator.Stri
 		"account_setting": true,
 		"internal":        true,
 		"external":        true,
+		"location":        true,
 	}
 
 	if !validModes[value] {
 		resp.Diagnostics.AddAttributeError(
 			req.Path,
 			"Invalid Tax Mode",
-			fmt.Sprintf("Tax mode must be one of: account_setting, internal, external. Got: %s", value),
+			fmt.Sprintf("Tax mode must be one of: account_setting, internal, external, location. Got: %s", value),
 		)
 	}
 }

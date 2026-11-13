@@ -131,6 +131,7 @@ func TestTaxModeValidator(t *testing.T) {
 		{"valid account_setting", "account_setting", false},
 		{"valid internal", "internal", false},
 		{"valid external", "external", false},
+		{"valid location", "location", false},
 		{"invalid mode", "invalid", true},
 		{"empty string", "", true},
 	}
