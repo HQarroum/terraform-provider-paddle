@@ -66,7 +66,7 @@ resource "paddle_price" "monthly" {
 ### Optional
 
 - `name` (String) Name of this price, shown to customers.
-- `tax_mode` (String) How tax is calculated. One of: `account_setting`, `internal`, `external`. Defaults to `account_setting`.
+- `tax_mode` (String) How tax is calculated. One of: `account_setting`, `internal`, `external`, `location`. Defaults to `account_setting`.
 - `unit_price` (Block) Price per unit.
   - `amount` (String, Required) Amount in the lowest denomination (e.g., cents).
   - `currency_code` (String, Required) Three-letter ISO 4217 currency code.
