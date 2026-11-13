@@ -22,6 +22,7 @@ import (
 // Ensure provider defined types fully satisfy framework interfaces.
 var _ resource.Resource = &PriceResource{}
 var _ resource.ResourceWithImportState = &PriceResource{}
+var _ resource.ResourceWithModifyPlan = &PriceResource{}
 
 // Creates a new Paddle price resource.
 func NewPriceResource() resource.Resource {
@@ -635,6 +636,38 @@ func (r *PriceResource) Read(ctx context.Context, req resource.ReadRequest, resp
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
 
+// ModifyPlan marks updated_at as unknown when a mutable attribute changes and
+// keeps it as a no-op if the plan does not change the resource.
+func (r *PriceResource) ModifyPlan(ctx context.Context, req resource.ModifyPlanRequest, resp *resource.ModifyPlanResponse) {
+	// Nothing to do on create or destroy.
+	if req.State.Raw.IsNull() || req.Plan.Raw.IsNull() {
+		return
+	}
+
+	var plan priceResourceModel
+	var state priceResourceModel
+	resp.Diagnostics.Append(req.Plan.Get(ctx, &plan)...)
+	resp.Diagnostics.Append(req.State.Get(ctx, &state)...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
+
+	if !priceHasMutableChanges(plan, state) {
+		return
+	}
+
+	resp.Diagnostics.Append(resp.Plan.SetAttribute(ctx, path.Root("updated_at"), types.StringUnknown())...)
+}
+
+// priceHasMutableChanges reports whether any attribute that is updated in place differs between plan and state.
+func priceHasMutableChanges(plan, state priceResourceModel) bool {
+	return !plan.Description.Equal(state.Description) ||
+		!plan.Name.Equal(state.Name) ||
+		!plan.TaxMode.Equal(state.TaxMode) ||
+		!plan.Quantity.Equal(state.Quantity) ||
+		!plan.CustomData.Equal(state.CustomData)
+}
+
 // Update modifies an existing Paddle price.
 // Note: unit_price, billing_cycle, and trial_period are immutable and will trigger replacement.
 func (r *PriceResource) Update(ctx context.Context, req resource.UpdateRequest, resp *resource.UpdateResponse) {
@@ -649,11 +682,7 @@ func (r *PriceResource) Update(ctx context.Context, req resource.UpdateRequest, 
 	}
 
 	// Check if any mutable fields actually changed
-	hasChanges := !plan.Description.Equal(state.Description) ||
-		!plan.Name.Equal(state.Name) ||
-		!plan.TaxMode.Equal(state.TaxMode) ||
-		!plan.Quantity.Equal(state.Quantity) ||
-		!plan.CustomData.Equal(state.CustomData)
+	hasChanges := priceHasMutableChanges(plan, state)
 
 	// If nothing changed, preserve state computed values and return
 	if !hasChanges {
