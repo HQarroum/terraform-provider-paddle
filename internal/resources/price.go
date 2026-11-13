@@ -11,6 +11,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
@@ -143,6 +144,9 @@ func (r *PriceResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 			"unit_price_overrides": schema.ListNestedAttribute{
 				Optional:            true,
 				MarkdownDescription: "Country-specific price overrides for regional pricing strategies. Useful for purchasing power parity or local market pricing. Cannot be changed after creation - changing this will force a new resource.",
+				PlanModifiers: []planmodifier.List{
+					listplanmodifier.RequiresReplace(),
+				},
 				NestedObject: schema.NestedAttributeObject{
 					Attributes: map[string]schema.Attribute{
 						"country_codes": schema.ListAttribute{
@@ -636,7 +640,7 @@ func (r *PriceResource) Read(ctx context.Context, req resource.ReadRequest, resp
 }
 
 // Update modifies an existing Paddle price.
-// Note: unit_price, billing_cycle, and trial_period are immutable and will trigger replacement.
+// Note: unit_price, unit_price_overrides, billing_cycle, and trial_period are immutable and will trigger replacement.
 func (r *PriceResource) Update(ctx context.Context, req resource.UpdateRequest, resp *resource.UpdateResponse) {
 	var plan priceResourceModel
 	var state priceResourceModel
